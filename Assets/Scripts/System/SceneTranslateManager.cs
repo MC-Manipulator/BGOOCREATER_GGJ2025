@@ -1,4 +1,5 @@
 using MoreMountains.Feedbacks;
+using MoreMountains.Tools;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -35,9 +36,10 @@ public class SceneTranslateManager : MonoBehaviour
         //SceneManager.LoadScene(menuName);
     }
 
-    public void ToGame()
+    public void ToGame(int chapternumber, int levelnumber)
     {
+        mmfp.GetFeedbackOfType<MMF_LoadScene>().DestinationSceneName = "Level" + chapternumber + "-" + levelnumber;
         mmfp.PlayFeedbacks();
-        //SceneManager.LoadScene(gameName);
+        //SceneManager.LoadScene("Level" + chapternumber + "-" + levelnumber);
     }
 }

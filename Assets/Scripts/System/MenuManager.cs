@@ -4,9 +4,55 @@ using UnityEngine;
 
 public class MenuManager : MonoBehaviour
 {
-    public void StartGame()
-    {
+    public static MenuManager instance;
 
+    public GameObject menuObject;
+    public Animator menuAnimator;
+
+    public int chapterNumber;
+
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+
+        menuAnimator = menuObject.GetComponent<Animator>();
+    }
+
+    public void EnterChapterSelect()
+    {
+        menuAnimator.Play("EnterChapterSelect");
+    }
+
+    public void ExitChapterSelect()
+    {
+        menuAnimator.Play("ExitChapterSelect");
+    }
+
+    public void EnterChapter1LevelSelect()
+    {
+        menuAnimator.Play("EnterChapter1LevelSelect");
+    }
+
+    public void ExitChapter1LevelSelect()
+    {
+        menuAnimator.Play("ExitChapter1LevelSelect");
+    }
+
+    public void SetChapter(int chapternumber)
+    {
+        chapterNumber = chapternumber;
+    }
+
+    public void StartGame(int levelnumber)
+    {
+        SceneTranslateManager.instance.ToGame(chapterNumber, levelnumber);
     }
 
     public void ExitGame()

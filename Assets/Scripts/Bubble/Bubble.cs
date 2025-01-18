@@ -1,12 +1,45 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface Bubble
+namespace DefaultNameSpace
 {
-    float size { get; set; }//´óĞ¡
-    float speed { get; set; }//×óÓÒÒÆ¶¯ËÙ¶È
-    Vector2 position { get; set; }//¶şÎ¬×ø±ê
+    /// <summary>
+    /// æ³¡æ³¡
+    /// <para>é€šç”¨ï¼Œç©å®¶å’Œå…¶ä»–æ³¡æ³¡éƒ½ä½¿ç”¨</para>
+    /// </summary>
+    public class Bubble : MonoBehaviour
+    {
+        // äº‹ä»¶
 
-    void UpdatePosition(float deltaTime);//¸üĞÂÎ»ÖÃ
+        // å±æ€§
+        /// <summary>
+        /// æ³¡æ³¡å¤§å°
+        /// <para>å€¼æ˜¯é¢ç§¯ï¼ŒS=R^2</para>
+        /// </summary>
+        public float Size
+        {
+            get => size;
+            set
+            {
+                size = value;
+                transform.localScale = Vector3.one * Mathf.Sqrt(size);
+            }
+        }
+
+        // å­—æ®µ
+        private float size;
+
+        // æ¶ˆæ¯
+
+        // æ–¹æ³•
+
+        /// <summary>
+        /// åƒæ‰æ³¡æ³¡
+        /// </summary>
+        public void Eat(Bubble bubble)
+        {
+            Size += bubble.Size;
+        }
+    }
 }
