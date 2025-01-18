@@ -1,7 +1,8 @@
 // µ¿æﬂ≈›≈›¿‡
 using UnityEngine;
+using DefaultNameSpace;
 
-public class ToolBubble : MonoBehaviour, Bubble
+public class ToolBubble : Bubble
 {
     public float size { get; set; }
     public float speed { get; set; }

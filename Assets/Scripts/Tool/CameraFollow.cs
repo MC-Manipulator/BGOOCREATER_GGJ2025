@@ -10,19 +10,22 @@ public class CameraFollow : MonoBehaviour
     public float transitionDuration = 3f; // 动画过渡时间
     private bool isFollowing = false; // 是否开始跟随玩家泡泡
     private float transitionTime = 0f; // 动画过渡计时器
-    private PlayerMove playerMove;  // 引用 PlayerMove 脚本
+    private PlayerCtrl playerMove;  // 引用 PlayerMove 脚本
+
+
 
     private void Start()
     {
         // 获取 PlayerMove 脚本组件
-        playerMove = playerBubble.GetComponent<PlayerMove>();
+        playerMove = playerBubble.GetComponent<PlayerCtrl>();
 
-        // 初始化状态，设置为从顶部开始
-        transform.position = topViewPoint.position;
     }
 
     private void LateUpdate()
     {
+        if (!showingLevel)
+            return;
+
         if (playerBubble == null)
         {
             Debug.LogWarning("PlayerBubble is not assigned to CameraFollow.");
@@ -40,11 +43,12 @@ public class CameraFollow : MonoBehaviour
             {
                 // 过渡完成，开始跟随玩家泡泡
                 isFollowing = true;
-
+                EndShowLevel();
                 // 启动玩家泡泡的移动
-                playerMove.SetMovementEnabled(true);  // 启用玩家泡泡的移动
+                //playerMove.SetMovementEnabled(true);  // 启用玩家泡泡的移动
             }
         }
+        /*
         else
         {
             // 跟随玩家泡泡
@@ -52,5 +56,22 @@ public class CameraFollow : MonoBehaviour
             newPosition.z = -10; // 确保 Z 轴固定为 -10
             transform.position = newPosition;
         }
+        */
+    }
+
+    public bool showingLevel = false;
+
+    public void StartShowLevel()
+    {
+
+        // 初始化状态，设置为从顶部开始
+        transform.position = topViewPoint.position;
+        showingLevel = true;
+
+    }
+
+    public void EndShowLevel()
+    {
+        showingLevel = false;
     }
 }

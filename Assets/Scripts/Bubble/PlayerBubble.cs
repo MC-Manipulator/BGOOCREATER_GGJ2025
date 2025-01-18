@@ -1,7 +1,8 @@
 // ÕÊº“≈›≈›¿‡
 using UnityEngine;
+using DefaultNameSpace;
 
-public class PlayerBubble : MonoBehaviour, Bubble
+public class PlayerBubble : Bubble
 {
     public float size { get; set; }
     public float speed { get; set; }

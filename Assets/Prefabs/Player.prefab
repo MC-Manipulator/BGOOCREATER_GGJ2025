@@ -77,11 +77,11 @@ GameObject:
   m_Component:
   - component: {fileID: 6726838941742994643}
   - component: {fileID: 4830634675270936061}
-  - component: {fileID: 4190004015864415336}
+  - component: {fileID: 2585894195927226889}
   - component: {fileID: 1224054065523858780}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -120,7 +120,8 @@ MonoBehaviour:
   minVy: 0.5
   maxVx: 3
   vChangeSpeed: 4
---- !u!114 &4190004015864415336
+  isRestrictMove: 0
+--- !u!114 &2585894195927226889
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -132,6 +133,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb29e80dec1c86443a15d713a14c11a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isInvincible: 0
 --- !u!50 &1224054065523858780
 Rigidbody2D:
   serializedVersion: 4

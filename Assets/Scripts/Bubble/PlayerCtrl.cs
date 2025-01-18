@@ -35,7 +35,7 @@ namespace DefaultNameSpace
         /// <summary>
         /// 起点（重生点）
         /// </summary>
-        private Vector3 startPoint;
+        //private Vector3 startPoint;
 
         // 消息
 
@@ -43,10 +43,28 @@ namespace DefaultNameSpace
         {
             // 登记事件
             GetComponent<Bubble>().OnDie += Bubble_OnDie;
-            startPoint = transform.position;
-            Restart();
+            //startPoint = transform.position;
+            //Restart();
         }
+
+
         private void FixedUpdate()
+        {
+            if (isRestrictMove)
+            {
+                return;
+            }
+
+            Move();
+        }
+
+        // 方法
+
+        /// <summary>
+        /// 重新开始
+        /// </summary>
+        /// 
+        private void Move()
         {
             // 获取水平和垂直方向的输入值
             // 并转为目标速度
@@ -67,22 +85,32 @@ namespace DefaultNameSpace
             transform.position += Velocity * Time.fixedDeltaTime;
         }
 
-        // 方法
-
-        /// <summary>
-        /// 重新开始
-        /// </summary>
+        /*
         public void Restart()
         {
-            transform.position = startPoint;
             Bubble b = GetComponent<Bubble>();
+            transform.position = startPoint;
             b.Size = 4;
             b.SetInvincibleTime(8);
         }
+        */
+
         private void Bubble_OnDie()
         {
             Debug.Log("你死了！");
-            Restart();
+            //Restart();
+        }
+
+        public bool isRestrictMove = false;
+
+        public void RestrictMove()
+        {
+            isRestrictMove = true;
+        }
+
+        public void DerestrictMove()
+        {
+            isRestrictMove = false;
         }
     }
 }

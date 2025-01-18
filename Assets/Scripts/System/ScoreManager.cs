@@ -11,6 +11,18 @@ public class ScoreManager : MonoBehaviour
     private float _timeRatio = 3000; //时间的得分乘数
     private float _sizeRatio = 2000; //泡泡大小的得分乘数
 
+    private void Awake()
+    {
+        if (!instance)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
     public int GetScore()
     {
         CalculateScore();
@@ -52,7 +64,7 @@ public class ScoreManager : MonoBehaviour
     {
         int size = 0;
 
-        //size = ; 
+        size = LevelManager.instance.GetPlayerSize(); 
         size = (int)(size * _sizeRatio);
 
         return size;
