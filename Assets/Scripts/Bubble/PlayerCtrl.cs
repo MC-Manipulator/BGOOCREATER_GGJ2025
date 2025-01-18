@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEditor.Searcher.SearcherWindow.Alignment;
 
 namespace DefaultNameSpace
 {
@@ -9,7 +8,7 @@ namespace DefaultNameSpace
     /// 玩家移动
     /// <para>让泡泡受玩家操控</para>
     /// </summary>
-    public class PlayerMove : MonoBehaviour
+    public class PlayerCtrl : MonoBehaviour
     {
         // 事件
 
@@ -33,9 +32,21 @@ namespace DefaultNameSpace
         [SerializeField]
         private float vChangeSpeed;
 
+        /// <summary>
+        /// 起点（重生点）
+        /// </summary>
+        private Vector3 startPoint;
+
         // 消息
 
-        void FixedUpdate()
+        private void Start()
+        {
+            // 登记事件
+            GetComponent<Bubble>().OnDie += Bubble_OnDie;
+            startPoint = transform.position;
+            Restart();
+        }
+        private void FixedUpdate()
         {
             // 获取水平和垂直方向的输入值
             // 并转为目标速度
@@ -58,6 +69,20 @@ namespace DefaultNameSpace
 
         // 方法
 
-
+        /// <summary>
+        /// 重新开始
+        /// </summary>
+        public void Restart()
+        {
+            transform.position = startPoint;
+            Bubble b = GetComponent<Bubble>();
+            b.Size = 4;
+            b.SetInvincibleTime(8);
+        }
+        private void Bubble_OnDie()
+        {
+            Debug.Log("你死了！");
+            Restart();
+        }
     }
 }
