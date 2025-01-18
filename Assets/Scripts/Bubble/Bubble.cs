@@ -6,11 +6,15 @@ namespace DefaultNameSpace
 {
     /// <summary>
     /// 泡泡
-    /// <para>通用，玩家和其他泡泡都使用</para>
+    /// <para>通用，玩家和其他泡泡都使用这个类</para>
     /// </summary>
     public class Bubble : MonoBehaviour
     {
         // 事件
+        /// <summary>
+        /// 死亡事件，死亡时触发
+        /// </summary>
+        public event Action OnDie;
 
         // 属性
         /// <summary>
@@ -40,6 +44,15 @@ namespace DefaultNameSpace
         public void Eat(Bubble bubble)
         {
             Size += bubble.Size;
+            bubble.Die();
+        }
+        /// <summary>
+        /// 死亡
+        /// </summary>
+        public void Die()
+        {
+            // 触发死亡事件
+            OnDie?.Invoke();
         }
     }
 }
