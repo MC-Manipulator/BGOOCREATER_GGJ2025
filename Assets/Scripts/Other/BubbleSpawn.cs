@@ -16,7 +16,7 @@ namespace DefaultNameSpace
 
         [Header("生成时间间隔")]
         [SerializeField]
-        private float SpawnTime = 0.2f;
+        private float SpawnTime = 0.5f;
 
         [Header("泡泡属性")]
         [SerializeField]
@@ -24,17 +24,19 @@ namespace DefaultNameSpace
         [SerializeField]
         private float SizeMax = 10;
         [SerializeField]
-        private float VStaticYMin = 0.5f;
+        private float VStaticXMax = 0.5f;
         [SerializeField]
-        private float VStaticYMax = 2;
+        private float VStaticYMin = 0.4f;
+        [SerializeField]
+        private float VStaticYMax = 3.5f;
         [SerializeField]
         private float VRateMin = 0;
         [SerializeField]
         private float VRateMax = 4;
         [SerializeField]
-        private float RotateSpeedMin = 0.8f;
+        private float RotateSpeedMin = 0.6f;
         [SerializeField]
-        private float RotateSpeedMax = 6;
+        private float RotateSpeedMax = 8;
 
         private float time;
 
@@ -44,7 +46,10 @@ namespace DefaultNameSpace
         {
             time -= Time.deltaTime;
             if (time <= 0)
+            {
                 time = SpawnTime;
+                GenerateBubble();
+            }
         }
 
         // 方法
@@ -52,13 +57,17 @@ namespace DefaultNameSpace
         /// <summary>
         /// 生成泡泡（不是玩家泡泡）
         /// </summary>
-        public Bubble GenerateBubble()
+        public void GenerateBubble()
         {
             // 2 Pi
             const float Pi2 = Mathf.PI * 2;
 
             GameObject go = Instantiate(this.bubble);
+            go.transform.position = transform.position;
 
+            // 初始化 Bubble 各属性
+            Bubble bubbleState = go.GetComponent<Bubble>();
+            bubbleState.Size = Random.Range(SizeMin, SizeMax);
 
             // 初始化 BubbleCtrl 各属性
             BubbleCtrl bubble = go.GetComponent<BubbleCtrl>();
@@ -66,18 +75,13 @@ namespace DefaultNameSpace
             bubble.RotateSpeed = Random.Range(RotateSpeedMin, RotateSpeedMax)
                 * Random.value < 0.5f ? 1 : -1;
 
+            float vStaticX = Random.Range(-VStaticXMax, VStaticXMax);
             float vStaticY = Random.Range(VStaticYMin, VStaticYMax);
-            bubble.VStatic = new Vector2(0, vStaticY);
+            bubble.VStatic = new Vector2(vStaticX, vStaticY);
             bubble.VDynamics = new Vector2(1, 0).Rotate(Random.Range(0, Pi2));
 
             float vRate = Random.Range(VRateMin, VRateMax);
             bubble.VRate = new Vector2(vRate, 0).Rotate(Random.Range(0, Pi2));
-
-
-            // 初始化 Bubble 各属性
-            Bubble bubbleState = go.GetComponent<Bubble>();
-            bubbleState.Size = Random.Range(SizeMin, SizeMax);
-            return bubbleState;
         }
 
     }
