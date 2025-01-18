@@ -31,6 +31,10 @@ namespace DefaultNameSpace
         private float maxVx;
         [SerializeField]
         private float vChangeSpeed;
+        [SerializeField]
+        private float RunShrink = 0.01f;
+
+        private Bubble bubble;
 
         /// <summary>
         /// 起点（重生点）
@@ -41,19 +45,24 @@ namespace DefaultNameSpace
 
         private void Start()
         {
-            // 登记事件
-            GetComponent<Bubble>().OnDie += Bubble_OnDie;
+            bubble = GetComponent<Bubble>();
+            bubble.OnDie += Bubble_OnDie;       // 登记事件
             startPoint = transform.position;
             Restart();
         }
         private void FixedUpdate()
         {
             // 获取水平和垂直方向的输入值
-            // 并转为目标速度
-            Vector3 des = Vector3.zero;
-            des.x = Input.GetAxisRaw("Horizontal") * maxVx;
-
+            float inputX = Input.GetAxisRaw("Horizontal");
             float inputY = Input.GetAxisRaw("Vertical");
+            if (inputX != 0 && inputY != 0)
+            {
+                bubble.Size -= (bubble.Size + 8) * RunShrink * Time.fixedDeltaTime;
+            }
+
+            // 转换为目标速度
+            Vector3 des = Vector3.zero;
+            des.x = inputX * maxVx;
             if (inputY == 0)
                 des.y = normalVy;
             else if (inputY > 0)
@@ -76,8 +85,8 @@ namespace DefaultNameSpace
         {
             transform.position = startPoint;
             Bubble b = GetComponent<Bubble>();
-            b.Size = 4;
-            b.SetInvincibleTime(8);
+            b.Size = 5;
+            b.SetInvincibleTime(3);
         }
         private void Bubble_OnDie()
         {

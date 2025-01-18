@@ -24,12 +24,22 @@ namespace DefaultNameSpace
         [SerializeField]
         private float speed;
 
+        private Camera Camera;
+
         // 消息
 
-        public void Update()
+        private void Start()
         {
-            Vector3 target = player.position + new Vector3(0, above, -10);
-            transform.position = Vector3.Lerp(transform.position, target, speed * Time.deltaTime);
+            Camera = GetComponent<Camera>();
+        }
+        private void FixedUpdate()
+        {
+            Vector3 targetPos = player.position + new Vector3(0, above, -10);
+            transform.position = Vector3.Lerp(transform.position, targetPos, speed * Time.fixedDeltaTime);
+
+            float curSize = Camera.orthographicSize;
+            float targetSize = player.localScale.x + 4;
+            Camera.orthographicSize = Mathf.Lerp(curSize, targetSize, 0.6f * Time.fixedDeltaTime);
         }
 
         // 方法

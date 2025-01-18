@@ -14,17 +14,21 @@ namespace DefaultNameSpace
         [SerializeField]
         private GameObject bubble;
 
-        [Header("生成时间间隔")]
+        [Header("生成设置")]
         [SerializeField]
+        [Tooltip("生成时间间隔")]
         private float SpawnTime = 0.5f;
+        [SerializeField]
+        [Tooltip("单次生成个数")]
+        private int SpawnCount = 1;
 
-        [Header("泡泡属性")]
+        [Header("泡泡属性设置")]
         [SerializeField]
         private float SizeMin = 1;
         [SerializeField]
         private float SizeMax = 4;
         [SerializeField]
-        private float InvincibleTime = 8;
+        private float InvincibleTime = 0;
         [SerializeField]
         private float VStaticXMax = 0.5f;
         [SerializeField]
@@ -40,17 +44,32 @@ namespace DefaultNameSpace
         [SerializeField]
         private float RotateSpeedMax = 8;
 
+        private Vector2 PosMin;
+        private Vector2 PosMax;
         private float time;
 
         // 消息
 
+        private void Start()
+        {
+            PosMax = transform.localScale / 2;
+            PosMin = -PosMax;
+            PosMax += (Vector2)transform.position;
+            PosMin += (Vector2)transform.position;
+        }
         private void Update()
         {
             time -= Time.deltaTime;
             if (time <= 0)
             {
+                // 每过 SpawnTime 秒生成一次
                 time = SpawnTime;
-                GenerateBubble();
+
+                // 一次生成 SpawnCount 个
+                for (int i = 0; i < SpawnCount; i++)
+                {
+                    GenerateBubble();
+                }
             }
         }
 
@@ -65,7 +84,9 @@ namespace DefaultNameSpace
             const float Pi2 = Mathf.PI * 2;
 
             GameObject go = Instantiate(this.bubble);
-            go.transform.position = transform.position;
+            float x = Random.Range(PosMin.x, PosMax.x);
+            float y = Random.Range(PosMin.y, PosMax.y);
+            go.transform.position = new Vector3(x, y, 0);
 
             // 初始化 Bubble 各属性
             Bubble bubbleState = go.GetComponent<Bubble>();
