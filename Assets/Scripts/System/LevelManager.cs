@@ -73,7 +73,7 @@ public class LevelManager : MonoBehaviour
         int sizescore = ScoreManager.instance.GetSizeScore();
         int levelscore = ScoreManager.instance.GetLevelScore();
 
-        scoreBoard.GetComponent<RectTransform>().position = Vector2.zero;
+        scoreBoard.GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
         scoreBoard.transform.Find("Time").gameObject.GetComponent<TMP_Text>().text = timeString;
         scoreBoard.transform.Find("TimeScore").gameObject.GetComponent<TMP_Text>().text = timeString;
         scoreBoard.transform.Find("SizeScore").gameObject.GetComponent<TMP_Text>().text = sizescore.ToString();
@@ -84,22 +84,38 @@ public class LevelManager : MonoBehaviour
     public GameObject countDownText;
     public int countDownTime = 10;
     public int currentCountDownTime = 10;
+    public Vector2 popSize = new Vector2(6, 6);
 
     public void StartCountDown()
     {
         StartCoroutine("CountDown");
+
     }
 
-    IEnumerable CountDown()
+    public IEnumerator CountDown()
     {
+        countDownText.SetActive(true);
+        countDownText.GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
         currentCountDownTime = countDownTime;
         while (currentCountDownTime > 0)
         {
+            countDownText.transform.localScale = popSize;
             countDownText.GetComponent<TMP_Text>().text = "" + currentCountDownTime;
-            yield return new WaitForSeconds(1);
+            float count = 1;
+            while (count > 0)
+            {
+                count -= Time.deltaTime;
+                Vector2 currentvec = countDownText.transform.localScale;
+                countDownText.transform.localScale = currentvec - new Vector2(2f, 2f) * Time.deltaTime;
+                yield return new WaitForEndOfFrame();
+            }
+            //yield return new WaitForSeconds(1);
             currentCountDownTime -= 1;
         }
+        countDownText.transform.localScale = popSize * 2;
         countDownText.GetComponent<TMP_Text>().text = "Start!";
+        yield return new WaitForSeconds(0.8f);
+        countDownText.SetActive(false);
         StartLevel();
     }
 }
