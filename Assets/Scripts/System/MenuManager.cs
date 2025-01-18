@@ -9,6 +9,7 @@ public class MenuManager : MonoBehaviour
     public GameObject menuObject;
     public Animator menuAnimator;
 
+    public int chapterNumber;
 
     private void Awake()
     {
@@ -34,9 +35,24 @@ public class MenuManager : MonoBehaviour
         menuAnimator.Play("ExitChapterSelect");
     }
 
-    public void StartGame()
+    public void EnterChapter1LevelSelect()
     {
+        menuAnimator.Play("EnterChapter1LevelSelect");
+    }
 
+    public void ExitChapter1LevelSelect()
+    {
+        menuAnimator.Play("ExitChapter1LevelSelect");
+    }
+
+    public void SetChapter(int chapternumber)
+    {
+        chapterNumber = chapternumber;
+    }
+
+    public void StartGame(int levelnumber)
+    {
+        SceneTranslateManager.instance.ToGame(chapterNumber, levelnumber);
     }
 
     public void ExitGame()
