@@ -13,9 +13,9 @@ public class SceneTranslateManager : MonoBehaviour
 {
     public MMF_Player mmfp;
 
-    //private readonly static string menuName = "Menu"; //菜单场景的名称
+    private readonly static string menuName = "Menu"; //菜单场景的名称
     //private readonly static string loadingName = "Loading"; //加载界面场景的名称
-    //private readonly static string gameName = "Game"; // 游戏场景的名称
+    private readonly static string gameName = "Level"; // 游戏场景的名称
 
     public static SceneTranslateManager instance;
 
@@ -33,12 +33,13 @@ public class SceneTranslateManager : MonoBehaviour
 
     public void ToMenu()
     {
-        //SceneManager.LoadScene(menuName);
+        mmfp.GetFeedbackOfType<MMF_LoadScene>().DestinationSceneName = menuName;
+        mmfp.PlayFeedbacks();
     }
 
     public void ToGame(int chapternumber, int levelnumber)
     {
-        mmfp.GetFeedbackOfType<MMF_LoadScene>().DestinationSceneName = "Level" + chapternumber + "-" + levelnumber;
+        mmfp.GetFeedbackOfType<MMF_LoadScene>().DestinationSceneName = gameName + chapternumber + "-" + levelnumber;
         mmfp.PlayFeedbacks();
         //SceneManager.LoadScene("Level" + chapternumber + "-" + levelnumber);
     }
