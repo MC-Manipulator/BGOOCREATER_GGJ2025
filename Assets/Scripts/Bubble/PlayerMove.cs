@@ -34,9 +34,13 @@ namespace DefaultNameSpace
         private float vChangeSpeed;
 
         // 消息
+        private bool canMove = false; // 控制是否可以移动
 
         void FixedUpdate()
         {
+            if (!canMove)
+                return;  // 如果不能移动，则跳过本次更新
+
             // 获取水平和垂直方向的输入值
             // 并转为目标速度
             Vector3 des = Vector3.zero;
@@ -57,7 +61,11 @@ namespace DefaultNameSpace
         }
 
         // 方法
-
+        // 启用或禁用移动
+        public void SetMovementEnabled(bool enabled)
+        {
+            canMove = enabled;
+        }
 
     }
 }
