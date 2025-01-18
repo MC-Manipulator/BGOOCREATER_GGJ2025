@@ -33,16 +33,44 @@ namespace DefaultNameSpace
 
         // 字段
         private float size;
+        /// <summary>
+        /// 是否在无敌时间内
+        /// </summary>
+        public bool isInvincible;
 
         // 消息
 
+        void OnTriggerEnter2D(Collider2D other)
+        {
+            if (other.transform.parent.TryGetComponent(out Bubble bubble))
+            {
+                if (Size > bubble.Size)
+                {
+                    Eat(bubble);
+                }
+            }
+        }
+
         // 方法
+
+        public void SetInvincibleTime(float time)
+        {
+            isInvincible = true;
+            Invoke(nameof(BeNotInvincible), time);
+        }
+        public void BeNotInvincible()
+        {
+            isInvincible = false;
+        }
 
         /// <summary>
         /// 吃掉泡泡
         /// </summary>
         public void Eat(Bubble bubble)
         {
+            // 无敌时间内不能吃
+            if (bubble.isInvincible)
+                return;
             Size += bubble.Size;
             bubble.Die();
         }

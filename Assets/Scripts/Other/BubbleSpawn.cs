@@ -22,7 +22,9 @@ namespace DefaultNameSpace
         [SerializeField]
         private float SizeMin = 1;
         [SerializeField]
-        private float SizeMax = 10;
+        private float SizeMax = 4;
+        [SerializeField]
+        private float InvincibleTime = 8;
         [SerializeField]
         private float VStaticXMax = 0.5f;
         [SerializeField]
@@ -68,6 +70,7 @@ namespace DefaultNameSpace
             // 初始化 Bubble 各属性
             Bubble bubbleState = go.GetComponent<Bubble>();
             bubbleState.Size = Random.Range(SizeMin, SizeMax);
+            bubbleState.SetInvincibleTime(InvincibleTime);
 
             // 初始化 BubbleCtrl 各属性
             BubbleCtrl bubble = go.GetComponent<BubbleCtrl>();

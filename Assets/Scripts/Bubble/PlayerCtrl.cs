@@ -32,12 +32,19 @@ namespace DefaultNameSpace
         [SerializeField]
         private float vChangeSpeed;
 
+        /// <summary>
+        /// 起点（重生点）
+        /// </summary>
+        private Vector3 startPoint;
+
         // 消息
 
         private void Start()
         {
             // 登记事件
             GetComponent<Bubble>().OnDie += Bubble_OnDie;
+            startPoint = transform.position;
+            Restart();
         }
         private void FixedUpdate()
         {
@@ -62,9 +69,20 @@ namespace DefaultNameSpace
 
         // 方法
 
+        /// <summary>
+        /// 重新开始
+        /// </summary>
+        public void Restart()
+        {
+            transform.position = startPoint;
+            Bubble b = GetComponent<Bubble>();
+            b.Size = 4;
+            b.SetInvincibleTime(8);
+        }
         private void Bubble_OnDie()
         {
-            Destroy(gameObject);
+            Debug.Log("你死了！");
+            Restart();
         }
     }
 }
