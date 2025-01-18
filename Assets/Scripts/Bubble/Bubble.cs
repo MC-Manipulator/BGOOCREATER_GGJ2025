@@ -20,6 +20,7 @@ namespace DefaultNameSpace
         /// <summary>
         /// 泡泡大小
         /// <para>值是面积，S=R^2</para>
+        /// <para>太小会死亡</para>
         /// </summary>
         public float Size
         {
@@ -27,6 +28,11 @@ namespace DefaultNameSpace
             set
             {
                 size = value;
+                if (size < 0.1f)
+                {
+                    Die();
+                    return;
+                }
                 transform.localScale = Vector3.one * Mathf.Sqrt(size);
             }
         }
@@ -40,7 +46,11 @@ namespace DefaultNameSpace
 
         // 消息
 
-        void OnTriggerEnter2D(Collider2D other)
+        private void Start()
+        {
+            InvokeRepeating(nameof(Shrink), 1, 0.1f);
+        }
+        private void OnTriggerEnter2D(Collider2D other)
         {
             if (other.transform.parent.TryGetComponent(out Bubble bubble))
             {
@@ -55,6 +65,8 @@ namespace DefaultNameSpace
 
         public void SetInvincibleTime(float time)
         {
+            if (time <= 0)
+                return;
             isInvincible = true;
             Invoke(nameof(BeNotInvincible), time);
         }
@@ -81,6 +93,14 @@ namespace DefaultNameSpace
         {
             // 触发死亡事件
             OnDie?.Invoke();
+        }
+
+        /// <summary>
+        /// 随时间自动缩小
+        /// </summary>
+        public void Shrink()
+        {
+            Size -= Size * 0.002f + 0.01f;
         }
     }
 }
