@@ -166,9 +166,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd52cd2833a96024f88e5ae1da5ab9e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  score: 0
-  _timeRatio: 3000
-  _sizeRatio: 2000
+  _timeRatio: 1000
 --- !u!1 &67449209
 GameObject:
   m_ObjectHideFlags: 0
@@ -535,9 +533,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd52cd2833a96024f88e5ae1da5ab9e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  score: 0
-  _timeRatio: 3000
-  _sizeRatio: 2000
+  _timeRatio: 1000
 --- !u!1001 &194224737
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4780,7 +4776,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1307459933
 RectTransform:
   m_ObjectHideFlags: 0

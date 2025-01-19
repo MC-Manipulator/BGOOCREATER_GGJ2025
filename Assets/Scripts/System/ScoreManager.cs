@@ -6,12 +6,8 @@ public class ScoreManager : MonoBehaviour
 {
     public static ScoreManager instance;
 
-    public int score; //得分
-
     [SerializeField]
-    private float _timeRatio = 3000; //时间的得分乘数
-    [SerializeField]
-    private float _sizeRatio = 2000; //泡泡大小的得分乘数
+    private float _timeRatio = 1000;    //时间的得分乘数
 
     private void Awake()
     {
@@ -25,49 +21,30 @@ public class ScoreManager : MonoBehaviour
         }
     }
 
-    public int GetScore()
+    public int GetTotalScore()
     {
-        CalculateScore();
+        return (int)CalculateScore();
+    }
+
+    public float CalculateScore()
+    {
+        float score = GetTimeScore() * GetSizeScore();
         return score;
     }
 
-    public int CalculateScore()
+    public float GetTimeScore()
     {
-        score = 0;
+        float time = LevelManager.instance.time;
+        time = Mathf.Pow(time, -0.5f);  // y = x^(-0.5)
+        time *= _timeRatio;
 
-
-        score += GetLevelScore();
-        score += GetTimeScore();
-        score += GetSizeScore();
-
-
-        return score;
+        return time;
     }
 
-    public int GetLevelScore()
+    public float GetSizeScore()
     {
-        int score = 0;
-
-
-        return score;
-    }
-
-    public int GetTimeScore()
-    {
-        float time = 0;
-
-        time = LevelManager.instance.time;
-        time = (int)(time * _timeRatio);
-
-        return (int)time;
-    }
-
-    public int GetSizeScore()
-    {
-        int size = 0;
-
-        size = LevelManager.instance.GetPlayerSize(); 
-        size = (int)(size * _sizeRatio);
+        float size = LevelManager.instance.GetPlayerSize(); 
+        size = Mathf.Sqrt(size);
 
         return size;
     }
