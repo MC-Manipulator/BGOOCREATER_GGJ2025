@@ -2396,7 +2396,7 @@ Transform:
   m_GameObject: {fileID: 752515973}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 72.9, z: -10}
+  m_LocalPosition: {x: 0, y: 60, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3724,8 +3724,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerBubble: {fileID: 267436093}
-  startOffset: {x: 0, y: 50, z: 0}
-  offset: {x: 0, y: 2, z: -10}
+  startOffset: {x: 0, y: -50, z: 0}
   topViewPoint: {fileID: 1001284730}
   bottomViewPoint: {fileID: 752515974}
   transitionDuration: 3
@@ -3820,7 +3819,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 30
+  orthographic size: 100
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -4023,7 +4022,7 @@ Transform:
   m_GameObject: {fileID: 1001284729}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 173.8, z: -10}
+  m_LocalPosition: {x: 0, y: 180, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -8295,11 +8294,12 @@ SceneRoots:
   - {fileID: 774042566}
   - {fileID: 813075248}
   - {fileID: 267436092}
+  - {fileID: 752515974}
+  - {fileID: 1001284730}
   - {fileID: 1403549378}
   - {fileID: 534486447}
   - {fileID: 2070717651}
   - {fileID: 1680471121}
-  - {fileID: 752515974}
   - {fileID: 1364529932}
   - {fileID: 514344968}
   - {fileID: 895760127}
@@ -8310,6 +8310,5 @@ SceneRoots:
   - {fileID: 757313644}
   - {fileID: 1765739037}
   - {fileID: 1149011189}
-  - {fileID: 1001284730}
   - {fileID: 2091636909}
   - {fileID: 2104385537}

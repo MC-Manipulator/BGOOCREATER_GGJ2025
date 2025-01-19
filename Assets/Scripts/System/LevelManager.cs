@@ -237,9 +237,11 @@ public class LevelManager : MonoBehaviour
 
     public IEnumerator CountDown()
     {
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1f);
         instructionBar.SetActive(false);
 
+        // ¿ªÊ¼Ëõ·Å
+        maincamera.GetComponent<PlayerCamera>().enabled = true;
 
         countDownText.SetActive(true);
         countDownText.GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
@@ -270,6 +272,5 @@ public class LevelManager : MonoBehaviour
 
         StartLevel();
         isCountDown = false;
-        maincamera.GetComponent<PlayerCamera>().enabled = true;
     }
 }

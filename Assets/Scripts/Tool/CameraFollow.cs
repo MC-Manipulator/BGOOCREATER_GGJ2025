@@ -5,7 +5,6 @@ public class CameraFollow : MonoBehaviour
 {
     public Transform playerBubble; // 玩家泡泡对象
     public Vector3 startOffset = new Vector3(0, 30, 0);
-    public Vector3 offset = new Vector3(0, 2, -10); // 摄像头偏移量
     public Transform topViewPoint; // 顶部视角
     public Transform bottomViewPoint; // 底部视角
     public float transitionDuration = 3f; // 动画过渡时间
@@ -37,9 +36,6 @@ public class CameraFollow : MonoBehaviour
         transitionTime += Time.deltaTime;
         float lerpFactor = Mathf.Clamp01(transitionTime / transitionDuration);
         transform.position = Vector3.Lerp(topViewPoint.position + startOffset, bottomViewPoint.position, lerpFactor);
-
-        currSize = Mathf.Lerp(currSize, targetSize, 0.6f * Time.fixedDeltaTime);
-        Camera.orthographicSize = currSize;
 
         if (lerpFactor >= 1f)
         {

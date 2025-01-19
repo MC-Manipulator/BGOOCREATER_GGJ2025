@@ -636,7 +636,7 @@ Transform:
   m_GameObject: {fileID: 159367811}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 124.7, z: -10}
+  m_LocalPosition: {x: 0, y: 120.69, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4390,7 +4390,7 @@ Transform:
   m_GameObject: {fileID: 1145540166}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalPosition: {x: 0, y: -1.37, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5296,7 +5296,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerBubble: {fileID: 1958163126}
   startOffset: {x: 0, y: 50, z: 0}
-  offset: {x: 0, y: 2, z: -10}
   topViewPoint: {fileID: 159367812}
   bottomViewPoint: {fileID: 1145540167}
   transitionDuration: 3
@@ -5391,7 +5390,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 30
+  orthographic size: 50
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
