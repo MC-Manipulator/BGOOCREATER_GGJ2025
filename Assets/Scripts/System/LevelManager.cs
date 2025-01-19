@@ -1,7 +1,6 @@
 using DefaultNameSpace;
 using System.Collections;
 using System.Collections.Generic;
-using System.Drawing;
 using TMPro;
 using UnityEngine;
 
@@ -41,14 +40,8 @@ public class LevelManager : MonoBehaviour
 
     private void Awake()
     {
-        if (!instance)
-        {
-            instance = this;
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
+        instance = this;
+
         player.GetComponent<Bubble>().OnDie += OnPlayerDie;
 
         FirstEnterLevel();
@@ -78,6 +71,7 @@ public class LevelManager : MonoBehaviour
         state = LevelState.Start;
 
         //Pause();
+        player.SetActive(true);
         player.GetComponent<Bubble>().Size = 4;
         player.transform.position = new Vector3(startPoint.position.x, startPoint.position.y, 0);
         player.GetComponent<PlayerCtrl>().RestrictMove();
@@ -100,6 +94,7 @@ public class LevelManager : MonoBehaviour
     public void ResetPlayer()
     {
         CleanPool();
+        player.SetActive(true);
         maincamera.transform.position = new Vector3(startPoint.position.x, startPoint.position.y, -10);
         player.transform.position = new Vector3(startPoint.position.x, startPoint.position.y, 0);
         player.GetComponent<Bubble>().Size = 4;
@@ -120,6 +115,7 @@ public class LevelManager : MonoBehaviour
         {
             if (!maincamera.GetComponent<CameraFollow>().showingLevel && !isCountDown)
             {
+                maincamera.GetComponent<CameraFollow>().enabled = false;
                 StartCountDown();
             }
         }
@@ -149,15 +145,13 @@ public class LevelManager : MonoBehaviour
 
     public void OnPlayerDie()
     {
+        player.SetActive(false);
         RestartLevel();
     }
 
     public int GetPlayerSize()
     {
-        int size = 0;
-
-        size = (int)player.GetComponent<Bubble>().Size;
-
+        int size = (int)player.GetComponent<Bubble>().Size;
         return size;
     }
 
@@ -217,7 +211,7 @@ public class LevelManager : MonoBehaviour
     public void StartCountDown()
     {
         isCountDown = true;
-        StartCoroutine("CountDown");
+        StartCoroutine(nameof(CountDown));
 
     }
 

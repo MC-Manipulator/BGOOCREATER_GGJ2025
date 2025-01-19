@@ -20,9 +20,9 @@ namespace DefaultNameSpace
         private Transform player;
         [SerializeField]
         [Tooltip("相机中心在玩家上方的距离")]
-        private float above;
+        private float above = 0.6f;
         [SerializeField]
-        private float speed;
+        private float speed = 3;
 
         private Camera Camera;
 
@@ -34,12 +34,13 @@ namespace DefaultNameSpace
         }
         private void FixedUpdate()
         {
-            Vector3 targetPos = player.position + new Vector3(0, above, -10);
-            transform.position = Vector3.Lerp(transform.position, targetPos, speed * Time.fixedDeltaTime);
-
             float curSize = Camera.orthographicSize;
             float targetSize = player.localScale.x + 4;
-            Camera.orthographicSize = Mathf.Lerp(curSize, targetSize, 0.6f * Time.fixedDeltaTime);
+            Camera.orthographicSize = Mathf.Lerp(curSize, targetSize, Time.fixedDeltaTime);
+
+            float y = above * curSize;
+            Vector3 targetPos = player.position + new Vector3(0, y, -10);
+            transform.position = Vector3.Lerp(transform.position, targetPos, speed * Time.fixedDeltaTime);
         }
 
         // 方法
