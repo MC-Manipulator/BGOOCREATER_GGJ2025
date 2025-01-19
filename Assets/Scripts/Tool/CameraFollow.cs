@@ -9,9 +9,7 @@ public class CameraFollow : MonoBehaviour
     public Transform topViewPoint; // 顶部视角
     public Transform bottomViewPoint; // 底部视角
     public float transitionDuration = 3f; // 动画过渡时间
-    private bool isFollowing = false; // 是否开始跟随玩家泡泡
     private float transitionTime = 0f; // 动画过渡计时器
-    private PlayerCtrl playerMove;  // 引用 PlayerMove 脚本
     public float initSize = 30;
     public float currSize = 30;
     public float targetSize = 10;
@@ -21,63 +19,42 @@ public class CameraFollow : MonoBehaviour
 
     private void Start()
     {
-        // 获取 PlayerMove 脚本组件
-        playerMove = playerBubble.GetComponent<PlayerCtrl>();
         Camera = GetComponent<Camera>();
         currSize = initSize;
-
-    }
-
-    private void LateUpdate()
-    {
-        if (!showingLevel)
-            return;
 
         if (playerBubble == null)
         {
             Debug.LogWarning("PlayerBubble is not assigned to CameraFollow.");
             return;
         }
+    }
+    private void LateUpdate()
+    {
+        if (!showingLevel)
+            return;
 
-        if (!isFollowing)
+        // 从顶部到达底部的过渡
+        transitionTime += Time.deltaTime;
+        float lerpFactor = Mathf.Clamp01(transitionTime / transitionDuration);
+        transform.position = Vector3.Lerp(topViewPoint.position + startOffset, bottomViewPoint.position, lerpFactor);
+
+        currSize = Mathf.Lerp(currSize, targetSize, 0.6f * Time.fixedDeltaTime);
+        Camera.orthographicSize = currSize;
+
+        if (lerpFactor >= 1f)
         {
-            // 从顶部到达底部的过渡
-            transitionTime += Time.deltaTime;
-            float lerpFactor = Mathf.Clamp01(transitionTime / transitionDuration);
-            transform.position = Vector3.Lerp(topViewPoint.position + startOffset, bottomViewPoint.position, lerpFactor);
-
-            currSize = Mathf.Lerp(currSize, targetSize, 0.6f * Time.fixedDeltaTime);
-            Camera.orthographicSize = currSize;
-
-            if (lerpFactor >= 1f)
-            {
-                // 过渡完成，开始跟随玩家泡泡
-                isFollowing = true;
-                EndShowLevel();
-                // 启动玩家泡泡的移动
-                //playerMove.SetMovementEnabled(true);  // 启用玩家泡泡的移动
-            }
+            // 过渡完成
+            EndShowLevel();
         }
-        /*
-        else
-        {
-            // 跟随玩家泡泡
-            Vector3 newPosition = playerBubble.position + offset;
-            newPosition.z = -10; // 确保 Z 轴固定为 -10
-            transform.position = newPosition;
-        }
-        */
     }
 
     public bool showingLevel = false;
 
     public void StartShowLevel()
     {
-
         // 初始化状态，设置为从顶部开始
         transform.position = topViewPoint.position;
         showingLevel = true;
-
     }
 
     public void EndShowLevel()

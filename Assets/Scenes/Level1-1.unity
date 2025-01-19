@@ -2538,7 +2538,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1017092768}
-  above: 5
+  above: 0.6
   speed: 3
 --- !u!114 &804240195
 MonoBehaviour:

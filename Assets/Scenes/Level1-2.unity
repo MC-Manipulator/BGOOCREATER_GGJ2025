@@ -5280,7 +5280,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1958163126}
-  above: 5
+  above: 0.6
   speed: 3
 --- !u!114 &1323855318
 MonoBehaviour:
@@ -8656,6 +8656,7 @@ Transform:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
+  - {fileID: 1323855322}
   - {fileID: 2136978754}
   - {fileID: 861611928}
   - {fileID: 159367812}
@@ -8664,7 +8665,6 @@ SceneRoots:
   - {fileID: 1958163125}
   - {fileID: 762066065}
   - {fileID: 622069917}
-  - {fileID: 1323855322}
   - {fileID: 1445757969}
   - {fileID: 1358862574}
   - {fileID: 212431385}

@@ -3709,7 +3709,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 267436093}
-  above: 5
+  above: 0.6
   speed: 3
 --- !u!114 &949842751
 MonoBehaviour:
@@ -8291,6 +8291,7 @@ CanvasRenderer:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
+  - {fileID: 949842755}
   - {fileID: 774042566}
   - {fileID: 813075248}
   - {fileID: 267436092}
@@ -8298,7 +8299,6 @@ SceneRoots:
   - {fileID: 534486447}
   - {fileID: 2070717651}
   - {fileID: 1680471121}
-  - {fileID: 949842755}
   - {fileID: 752515974}
   - {fileID: 1364529932}
   - {fileID: 514344968}
