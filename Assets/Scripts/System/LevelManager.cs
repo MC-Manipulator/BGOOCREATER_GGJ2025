@@ -178,19 +178,18 @@ public class LevelManager : MonoBehaviour
 
     private void ShowScoreBoard()
     {
-        int score = ScoreManager.instance.GetScore();
-        int timescore = ScoreManager.instance.GetTimeScore();
-        int sizescore = ScoreManager.instance.GetSizeScore();
-        int levelscore = ScoreManager.instance.GetLevelScore();
+        int score = ScoreManager.instance.GetTotalScore();
+        float timescore = ScoreManager.instance.GetTimeScore();
+        float sizescore = ScoreManager.instance.GetSizeScore();
 
         scoreBoard.GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
 
         Transform scoreList = scoreBoard.transform.Find("ScoreList");
 
         scoreList.Find("TimePart").transform.Find("Time").gameObject.GetComponent<TMP_Text>().text = timeString;
-        scoreList.Find("TimeScorePart").transform.Find("TimeScore").gameObject.GetComponent<TMP_Text>().text = timescore.ToString();
-        scoreList.Find("SizeScorePart").transform.Find("SizeScore").gameObject.GetComponent<TMP_Text>().text = sizescore.ToString();
-        scoreList.Find("LevelScorePart").transform.Find("LevelScore").gameObject.GetComponent<TMP_Text>().text = levelScore.ToString();
+        scoreList.Find("TimeScorePart").transform.Find("TimeScore").gameObject.GetComponent<TMP_Text>().text = timescore.ToString("N2");
+        scoreList.Find("SizeScorePart").transform.Find("SizeScore").gameObject.GetComponent<TMP_Text>().text = sizescore.ToString("N2");
+        //scoreList.Find("LevelScorePart").transform.Find("LevelScore").gameObject.GetComponent<TMP_Text>().text = levelScore.ToString();
 
         scoreList.Find("Score").transform.Find("Score").gameObject.GetComponent<TMP_Text>().text = score.ToString();
         scoreBoard.SetActive(true);
