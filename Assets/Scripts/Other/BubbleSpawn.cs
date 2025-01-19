@@ -25,9 +25,9 @@ namespace DefaultNameSpace
 
         [Header("泡泡属性设置")]
         [SerializeField]
-        private float SizeMin = 1;
+        private float SizeMin = 0.6f;
         [SerializeField]
-        private float SizeMax = 4;
+        private float SizeMax = 2;
         [SerializeField]
         private float InvincibleTime = 0;
         [SerializeField]
@@ -104,16 +104,15 @@ namespace DefaultNameSpace
             //限制泡泡不会生成在其他泡泡或者障碍物上
             Collider2D[] hitColliders = Physics2D.OverlapCircleAll(position, 0.1f);
 
+            // 不和任意物体重叠
             if (hitColliders.Length > 0)
             {
                 // 找到了物体
-                foreach (var hitCollider in hitColliders)
-                {
-                    if (hitCollider.gameObject.tag == "Obstacle" || hitCollider.gameObject.tag == "Bubble")
-                    {
-                        return;
-                    }
-                }
+                //foreach (var hitCollider in hitColliders)
+                //{
+                //if (hitCollider.gameObject.CompareTag("Obstacle") || hitCollider.gameObject.CompareTag("Bubble"))
+                return;
+                //}
             }
 
             GameObject go = ReInstantiate.Run(this.bubble, GameObject.Find("BubblePool").transform);
@@ -127,8 +126,7 @@ namespace DefaultNameSpace
             // 初始化 BubbleCtrl 各属性
             BubbleCtrl bubble = go.GetComponent<BubbleCtrl>();
 
-            bubble.RotateSpeed = Random.Range(RotateSpeedMin, RotateSpeedMax)
-                * Random.value < 0.5f ? 1 : -1;
+            bubble.RotateSpeed = Random.Range(RotateSpeedMin, RotateSpeedMax);
 
             float vStaticX = Random.Range(-VStaticXMax, VStaticXMax);
             float vStaticY = Random.Range(VStaticYMin, VStaticYMax);

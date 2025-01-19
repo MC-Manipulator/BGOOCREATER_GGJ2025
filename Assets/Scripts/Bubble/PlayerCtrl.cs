@@ -51,7 +51,7 @@ namespace DefaultNameSpace
         {
             // 登记事件
             bubble = GetComponent<Bubble>();
-            bubble.OnDie += Bubble_OnDie;
+            //bubble.OnDie += Bubble_OnDie;
             //startPoint = transform.position;
             //Restart();
         }
@@ -113,11 +113,11 @@ namespace DefaultNameSpace
         }
         */
 
-        private void Bubble_OnDie()
-        {
-            Debug.Log("你死了！");
-            //Restart();
-        }
+        //private void Bubble_OnDie()
+        //{
+        //    Debug.Log("你死了！");
+        //    //Restart();
+        //}
 
         public void RestrictMove()
         {

@@ -57,7 +57,7 @@ MonoBehaviour:
   VRateMin: 0
   VRateMax: 4
   RotateSpeedMin: 0.6
-  RotateSpeedMax: 8
+  RotateSpeedMax: 2
 --- !u!212 &8513500402448384991
 SpriteRenderer:
   m_ObjectHideFlags: 0
