@@ -71,6 +71,7 @@ public class GameManager : MonoBehaviour
         {
             GameObject.Find("StartButton").GetComponentInChildren<TMP_Text>().text = "开始游戏";
             GameObject.Find("ExitButton").GetComponentInChildren<TMP_Text>().text = "退出游戏";
+            GameObject.Find("StaffButton").GetComponentInChildren<TMP_Text>().text = "开发人员";
             GameObject.Find("MenuCanvas").transform.Find("BackButton").Find("Text").GetComponent<TMP_Text>().text = "返回";
             GameObject.Find("MenuCanvas").transform.Find("BackToChapterSelectButton").Find("Text").GetComponent<TMP_Text>().text = "返回";
         }
@@ -78,6 +79,7 @@ public class GameManager : MonoBehaviour
         {
             GameObject.Find("StartButton").GetComponentInChildren<TMP_Text>().text = "Start";
             GameObject.Find("ExitButton").GetComponentInChildren<TMP_Text>().text = "Exit";
+            GameObject.Find("StaffButton").GetComponentInChildren<TMP_Text>().text = "Staff";
             GameObject.Find("MenuCanvas").transform.Find("BackButton").Find("Text").GetComponent<TMP_Text>().text = "Back";
             GameObject.Find("MenuCanvas").transform.Find("BackToChapterSelectButton").Find("Text").GetComponent<TMP_Text>().text = "Back";
         }

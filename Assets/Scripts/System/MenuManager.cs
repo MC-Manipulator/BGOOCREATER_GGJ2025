@@ -7,6 +7,7 @@ public class MenuManager : MonoBehaviour
     public static MenuManager instance;
 
     public GameObject menuObject;
+    public GameObject staffBar;
     public Animator menuAnimator;
 
     public int chapterNumber;
@@ -72,6 +73,16 @@ public class MenuManager : MonoBehaviour
     public void ExitGame()
     {
         Application.Quit();
+    }
+
+    public void OpenStaffBar()
+    {
+        staffBar.SetActive(true);
+    }
+
+    public void CloseStaffBar()
+    {
+        staffBar.SetActive(false);
     }
 
     public void SetChinese()
