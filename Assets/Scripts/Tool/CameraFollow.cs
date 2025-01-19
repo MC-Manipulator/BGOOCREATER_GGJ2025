@@ -4,6 +4,7 @@ using UnityEngine;
 public class CameraFollow : MonoBehaviour
 {
     public Transform playerBubble; // 玩家泡泡对象
+    public Vector3 startOffset = new Vector3(0, 30, 0);
     public Vector3 offset = new Vector3(0, 2, -10); // 摄像头偏移量
     public Transform topViewPoint; // 顶部视角
     public Transform bottomViewPoint; // 底部视角
@@ -11,13 +12,19 @@ public class CameraFollow : MonoBehaviour
     private bool isFollowing = false; // 是否开始跟随玩家泡泡
     private float transitionTime = 0f; // 动画过渡计时器
     private PlayerCtrl playerMove;  // 引用 PlayerMove 脚本
+    public float initSize = 30;
+    public float currSize = 30;
+    public float targetSize = 10;
 
 
+    private Camera Camera;
 
     private void Start()
     {
         // 获取 PlayerMove 脚本组件
         playerMove = playerBubble.GetComponent<PlayerCtrl>();
+        Camera = GetComponent<Camera>();
+        currSize = initSize;
 
     }
 
@@ -37,7 +44,10 @@ public class CameraFollow : MonoBehaviour
             // 从顶部到达底部的过渡
             transitionTime += Time.deltaTime;
             float lerpFactor = Mathf.Clamp01(transitionTime / transitionDuration);
-            transform.position = Vector3.Lerp(topViewPoint.position, bottomViewPoint.position, lerpFactor);
+            transform.position = Vector3.Lerp(topViewPoint.position + startOffset, bottomViewPoint.position, lerpFactor);
+
+            currSize = Mathf.Lerp(currSize, targetSize, 0.6f * Time.fixedDeltaTime);
+            Camera.orthographicSize = currSize;
 
             if (lerpFactor >= 1f)
             {

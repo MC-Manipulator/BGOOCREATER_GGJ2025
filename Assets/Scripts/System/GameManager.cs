@@ -71,15 +71,15 @@ public class GameManager : MonoBehaviour
         {
             GameObject.Find("StartButton").GetComponentInChildren<TMP_Text>().text = "开始游戏";
             GameObject.Find("ExitButton").GetComponentInChildren<TMP_Text>().text = "退出游戏";
-            GameObject.Find("Canvas").transform.Find("BackButton").Find("Text").GetComponent<TMP_Text>().text = "返回";
-            GameObject.Find("Canvas").transform.Find("BackToChapterSelectButton").Find("Text").GetComponent<TMP_Text>().text = "返回";
+            GameObject.Find("MenuCanvas").transform.Find("BackButton").Find("Text").GetComponent<TMP_Text>().text = "返回";
+            GameObject.Find("MenuCanvas").transform.Find("BackToChapterSelectButton").Find("Text").GetComponent<TMP_Text>().text = "返回";
         }
         if (language == Language.English)
         {
             GameObject.Find("StartButton").GetComponentInChildren<TMP_Text>().text = "Start";
             GameObject.Find("ExitButton").GetComponentInChildren<TMP_Text>().text = "Exit";
-            GameObject.Find("Canvas").transform.Find("BackButton").Find("Text").GetComponent<TMP_Text>().text = "Back";
-            GameObject.Find("Canvas").transform.Find("BackToChapterSelectButton").Find("Text").GetComponent<TMP_Text>().text = "Back";
+            GameObject.Find("MenuCanvas").transform.Find("BackButton").Find("Text").GetComponent<TMP_Text>().text = "Back";
+            GameObject.Find("MenuCanvas").transform.Find("BackToChapterSelectButton").Find("Text").GetComponent<TMP_Text>().text = "Back";
         }
     }
 
@@ -87,7 +87,7 @@ public class GameManager : MonoBehaviour
     {
         if (language == Language.Chinese)
         {
-            Transform scorebar = GameObject.Find("Canvas").transform.Find("ScoreBar");
+            Transform scorebar = GameObject.Find("GameCanvas").transform.Find("ScoreBar");
             scorebar.transform.Find("Title").Find("TitleText").GetComponent<TMP_Text>().text = "游戏结束";
 
             Transform scoreList = scorebar.Find("ScoreList");
@@ -101,18 +101,18 @@ public class GameManager : MonoBehaviour
             scorebar.transform.Find("RestartButton").Find("Text").GetComponent<TMP_Text>().text = "重新开始";
 
 
-            Transform pauseBar = GameObject.Find("Canvas").transform.Find("PauseBar");
+            Transform pauseBar = GameObject.Find("GameCanvas").transform.Find("PauseBar");
             pauseBar.Find("Title").Find("TitleText").GetComponent<TMP_Text>().text = "暂停";
             pauseBar.Find("ResumeButton").Find("Text").GetComponent<TMP_Text>().text = "返回游戏";
             pauseBar.Find("RestartButton").Find("Text").GetComponent<TMP_Text>().text = "重新开始";
             pauseBar.Find("BackButton").Find("Text").GetComponent<TMP_Text>().text = "返回菜单";
 
-            Transform timeRecord = GameObject.Find("Canvas").transform.Find("TimeRecord");
+            Transform timeRecord = GameObject.Find("GameCanvas").transform.Find("TimeRecord");
             timeRecord.Find("Text").GetComponent<TMP_Text>().text = "时间:";
         }
         if (language == Language.English)
         {
-            Transform scorebar = GameObject.Find("Canvas").transform.Find("ScoreBar");
+            Transform scorebar = GameObject.Find("GameCanvas").transform.Find("ScoreBar");
             scorebar.transform.Find("Title").Find("TitleText").GetComponent<TMP_Text>().text = "Game End";
 
             Transform scoreList = scorebar.Find("ScoreList");
@@ -126,13 +126,13 @@ public class GameManager : MonoBehaviour
             scorebar.transform.Find("RestartButton").Find("Text").GetComponent<TMP_Text>().text = "Restart";
 
 
-            Transform pauseBar = GameObject.Find("Canvas").transform.Find("PauseBar");
+            Transform pauseBar = GameObject.Find("GameCanvas").transform.Find("PauseBar");
             pauseBar.Find("Title").Find("TitleText").GetComponent<TMP_Text>().text = "Pause";
             pauseBar.Find("ResumeButton").Find("Text").GetComponent<TMP_Text>().text = "Resume";
             pauseBar.Find("RestartButton").Find("Text").GetComponent<TMP_Text>().text = "Restart";
             pauseBar.Find("BackButton").Find("Text").GetComponent<TMP_Text>().text = "Back To Menu";
 
-            Transform timeRecord = GameObject.Find("Canvas").transform.Find("TimeRecord");
+            Transform timeRecord = GameObject.Find("GameCanvas").transform.Find("TimeRecord");
             timeRecord.Find("Text").GetComponent<TMP_Text>().text = "Time:";
         }
     }

@@ -122,6 +122,7 @@ MonoBehaviour:
   vChangeSpeed: 4
   RunShrink: 0.05
   isRestrictMove: 0
+  runShrinking: 0
 --- !u!50 &1224054065523858780
 Rigidbody2D:
   serializedVersion: 4
@@ -161,6 +162,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb29e80dec1c86443a15d713a14c11a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isDead: 0
+  isShrinking: 0
   isInvincible: 0
 --- !u!1 &7912773866696909949
 GameObject:
@@ -189,8 +192,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.12, y: 0.12, z: 0.12}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 6726838941742994643}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -235,7 +238,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 40bcaeb3d51f0a443b8f9692f1a8d243, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 58eea00393a6e77409f8c89950af328a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

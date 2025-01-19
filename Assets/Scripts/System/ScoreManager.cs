@@ -8,7 +8,9 @@ public class ScoreManager : MonoBehaviour
 
     public int score; //得分
 
+    [SerializeField]
     private float _timeRatio = 3000; //时间的得分乘数
+    [SerializeField]
     private float _sizeRatio = 2000; //泡泡大小的得分乘数
 
     private void Awake()

@@ -26,6 +26,7 @@ public class LevelManager : MonoBehaviour
     public GameObject scoreBoard;
     public GameObject pauseBoard;
     public GameObject timeRecord;
+    public GameObject instructionBar;
 
     public float time;
     public string timeString;
@@ -76,7 +77,7 @@ public class LevelManager : MonoBehaviour
     {
         time = 0;
         state = LevelState.Start;
-
+        instructionBar.SetActive(true);
         //Pause();
         player.GetComponent<Bubble>().Size = 4;
         player.transform.position = new Vector3(startPoint.position.x, startPoint.position.y, 0);
@@ -242,7 +243,8 @@ public class LevelManager : MonoBehaviour
 
     public IEnumerator CountDown()
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(2f);
+        instructionBar.SetActive(false);
 
 
         countDownText.SetActive(true);

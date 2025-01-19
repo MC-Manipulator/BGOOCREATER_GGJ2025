@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9045644893383472567}
   - component: {fileID: 8690760244487349161}
+  - component: {fileID: 6109686189674699883}
   m_Layer: 0
   m_Name: Circle
   m_TagString: Untagged
@@ -27,8 +28,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.12, y: 0.12, z: 0.12}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 9070467245598872358}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -73,7 +74,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 40bcaeb3d51f0a443b8f9692f1a8d243, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 34db3bf431786be4aa59979540604d27, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 0.4}
   m_FlipX: 0
   m_FlipY: 0
@@ -84,6 +85,33 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &6109686189674699883
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2874043282764090969}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f63bceb6cd5a22545916dddb68ce574d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spriteList:
+  - {fileID: 21300000, guid: 58eea00393a6e77409f8c89950af328a, type: 3}
+  - {fileID: 21300000, guid: 34db3bf431786be4aa59979540604d27, type: 3}
+  - {fileID: 21300000, guid: 216f91fce93dc9642b96000efd7e915a, type: 3}
+  - {fileID: 21300000, guid: 284f53dba8a2a934fb17e922fde2a036, type: 3}
+  - {fileID: 21300000, guid: 6fae4801e27793b4887bfd4dbb397201, type: 3}
+  - {fileID: 21300000, guid: 545357bbba9bcd346822d44250ad3670, type: 3}
+  - {fileID: 21300000, guid: 3686c85fd706002458b225c5a1bd7afb, type: 3}
+  - {fileID: 21300000, guid: 448c22694fa740745b205c4af80feefc, type: 3}
+  - {fileID: 21300000, guid: 225019b0a97685249a4bda7c651660ee, type: 3}
+  - {fileID: 21300000, guid: dac8d002dc2fb2a4bbef86c374a70384, type: 3}
+  - {fileID: 21300000, guid: 85ad969614b413e48a8c85d8d0802fc4, type: 3}
+  - {fileID: 21300000, guid: ef843dc0c37e7294eae2a6426d0527bb, type: 3}
+  - {fileID: 21300000, guid: 3672d1cee1ce27f44981f6f1d49f27ad, type: 3}
+  - {fileID: 21300000, guid: 78b8b34ac26de014c911d3bbd9dd2996, type: 3}
 --- !u!1 &4109825250252637778
 GameObject:
   m_ObjectHideFlags: 0

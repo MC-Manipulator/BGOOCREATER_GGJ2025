@@ -59,7 +59,6 @@ namespace DefaultNameSpace
             }
             else
             {
-                Debug.Log("1");
                 CancelInvoke(nameof(Shrink));
             }
         }
