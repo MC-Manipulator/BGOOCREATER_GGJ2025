@@ -2929,51 +2929,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &907861099
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 907861100}
-  - component: {fileID: 907861101}
-  m_Layer: 0
-  m_Name: ScoreManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &907861100
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 907861099}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1427564653}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &907861101
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 907861099}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dd52cd2833a96024f88e5ae1da5ab9e5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _timeRatio: 3000
 --- !u!1001 &925555724
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5368,7 +5323,6 @@ Transform:
   - {fileID: 1663766339}
   - {fileID: 2009675218}
   - {fileID: 1878853209}
-  - {fileID: 907861100}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1439831216
@@ -7319,7 +7273,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd52cd2833a96024f88e5ae1da5ab9e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _timeRatio: 3000
+  _timeRatio: 1000
 --- !u!4 &2022447836 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3743610786799761576, guid: 506011ea6f57c144eb3d70d68636813e, type: 3}
