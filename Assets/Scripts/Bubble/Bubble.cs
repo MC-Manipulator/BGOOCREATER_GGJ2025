@@ -47,6 +47,9 @@ namespace DefaultNameSpace
         /// </summary>
         public bool isInvincible;
 
+        public GameObject playerEatSound;
+        public GameObject playerDieSound;
+
         // 消息
 
         private void Start()
@@ -98,9 +101,14 @@ namespace DefaultNameSpace
         /// </summary>
         public void Eat(Bubble bubble)
         {
+            if (gameObject.tag == "Player")
+            {
+                playerEatSound.GetComponent<AudioSource>().Play();
+            }
             // 无敌时间内不能吃
             if (bubble.isInvincible || isDead)
                 return;
+
             Size += bubble.Size;
             bubble.Die();
         }
@@ -111,6 +119,10 @@ namespace DefaultNameSpace
         {
             if (!isDead)
             {
+                if (gameObject.tag == "Player")
+                {
+                    playerDieSound.GetComponent<AudioSource>().Play();
+                }
                 isDead = true;
                 // 触发死亡事件
                 OnDie?.Invoke();

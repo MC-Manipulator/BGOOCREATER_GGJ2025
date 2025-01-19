@@ -9,7 +9,8 @@ public class MenuManager : MonoBehaviour
     public GameObject menuObject;
     public GameObject staffBar;
     public Animator menuAnimator;
-
+    
+    public GameObject clip;
     public int chapterNumber;
 
     private void Awake()
@@ -21,9 +22,11 @@ public class MenuManager : MonoBehaviour
         else
         {
             Destroy(gameObject);
+            return;
         }
 
         menuAnimator = menuObject.GetComponent<Animator>();
+        clip.GetComponent<AudioSource>().Play();
     }
 
     public void Start()
@@ -33,11 +36,8 @@ public class MenuManager : MonoBehaviour
         {
             GameManager.instance.state = GameState.Menu;
             GameManager.instance.RefreshMenuLanguage();
+            GameManager.instance.LoadData();
         }
-    }
-
-    private void Update()
-    {
     }
 
     public void EnterChapterSelect()
@@ -67,6 +67,7 @@ public class MenuManager : MonoBehaviour
 
     public void StartGame(int levelnumber)
     {
+        clip.GetComponent<AudioSource>().Stop();
         SceneTranslateManager.instance.ToGame(chapterNumber, levelnumber);
     }
 

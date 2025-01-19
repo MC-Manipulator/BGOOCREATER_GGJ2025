@@ -37,6 +37,7 @@ public class LevelManager : MonoBehaviour
     public GameObject maincamera;
     public GameObject restartMask;
     public GameObject bubblePool;
+    public GameObject bgm;
     public int levelNo = 0;
 
     private void Awake()
@@ -45,6 +46,7 @@ public class LevelManager : MonoBehaviour
 
         player.GetComponent<Bubble>().OnDie += OnPlayerDie;
 
+        bgm.GetComponent<AudioSource>().Play();
         FirstEnterLevel();
     }
 
@@ -95,7 +97,7 @@ public class LevelManager : MonoBehaviour
     public void ResetPlayer()
     {
         CleanPool();
-        player.SetActive(true);
+        //player.SetActive(true);
         maincamera.transform.position = new Vector3(startPoint.position.x, startPoint.position.y, -10);
         player.transform.position = new Vector3(startPoint.position.x, startPoint.position.y, 0);
         player.GetComponent<Bubble>().Size = 4;
@@ -146,7 +148,7 @@ public class LevelManager : MonoBehaviour
 
     public void OnPlayerDie()
     {
-        player.SetActive(false);
+        //player.SetActive(false);
         RestartLevel();
     }
 
@@ -192,9 +194,10 @@ public class LevelManager : MonoBehaviour
         //scoreList.Find("LevelScorePart").transform.Find("LevelScore").gameObject.GetComponent<TMP_Text>().text = levelScore.ToString();
 
         scoreList.Find("Score").transform.Find("Score").gameObject.GetComponent<TMP_Text>().text = score.ToString();
+        
         scoreBoard.SetActive(true);
-
-        ES3.Save("Level" + levelNo, score);
+        if (score > ES3.Load("Level" + levelNo, 0))
+            ES3.Save("Level" + levelNo, score);
     }
 
     private void HideScoreBoard()
@@ -231,6 +234,7 @@ public class LevelManager : MonoBehaviour
 
     public void BackToMenu()
     {
+        bgm.GetComponent<AudioSource>().Stop();
         SceneTranslateManager.instance.ToMenu();
     }
 

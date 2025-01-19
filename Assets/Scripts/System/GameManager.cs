@@ -45,10 +45,14 @@ public class GameManager : MonoBehaviour
     {
         language = ES3.Load<Language>("Language", Language.Chinese);
 
-        for (int i = 1;i < 3;i++)
+        for (int i = 1;i <= 3;i++)
         {
             scoreList[i] = ES3.Load<int>("Level" + i, 0);
         }
+
+        GameObject.Find("Canvas").transform.Find("LevelSelect").Find("Level1").Find("Level1Score").GetComponent<TMP_Text>().text = scoreList[1].ToString();
+        GameObject.Find("Canvas").transform.Find("LevelSelect").Find("Level2").Find("Level2Score").GetComponent<TMP_Text>().text = scoreList[2].ToString();
+        GameObject.Find("Canvas").transform.Find("LevelSelect").Find("Level3").Find("Level3Score").GetComponent<TMP_Text>().text = scoreList[3].ToString();
     }
 
     public void SetChinese()
@@ -72,16 +76,22 @@ public class GameManager : MonoBehaviour
             GameObject.Find("StartButton").GetComponentInChildren<TMP_Text>().text = "开始游戏";
             GameObject.Find("ExitButton").GetComponentInChildren<TMP_Text>().text = "退出游戏";
             GameObject.Find("StaffButton").GetComponentInChildren<TMP_Text>().text = "开发人员";
-            GameObject.Find("MenuCanvas").transform.Find("BackButton").Find("Text").GetComponent<TMP_Text>().text = "返回";
-            GameObject.Find("MenuCanvas").transform.Find("BackToChapterSelectButton").Find("Text").GetComponent<TMP_Text>().text = "返回";
+            GameObject.Find("Canvas").transform.Find("BackButton").Find("Text").GetComponent<TMP_Text>().text = "返回";
+            GameObject.Find("Canvas").transform.Find("BackToChapterSelectButton").Find("Text").GetComponent<TMP_Text>().text = "返回";
+            GameObject.Find("Canvas").transform.Find("LevelSelect").Find("Level1").Find("Level1ScoreText").GetComponent<TMP_Text>().text = "得分:";
+            GameObject.Find("Canvas").transform.Find("LevelSelect").Find("Level2").Find("Level2ScoreText").GetComponent<TMP_Text>().text = "得分:";
+            GameObject.Find("Canvas").transform.Find("LevelSelect").Find("Level3").Find("Level3ScoreText").GetComponent<TMP_Text>().text = "得分:";
         }
         if (language == Language.English)
         {
             GameObject.Find("StartButton").GetComponentInChildren<TMP_Text>().text = "Start";
             GameObject.Find("ExitButton").GetComponentInChildren<TMP_Text>().text = "Exit";
             GameObject.Find("StaffButton").GetComponentInChildren<TMP_Text>().text = "Staff";
-            GameObject.Find("MenuCanvas").transform.Find("BackButton").Find("Text").GetComponent<TMP_Text>().text = "Back";
-            GameObject.Find("MenuCanvas").transform.Find("BackToChapterSelectButton").Find("Text").GetComponent<TMP_Text>().text = "Back";
+            GameObject.Find("Canvas").transform.Find("BackButton").Find("Text").GetComponent<TMP_Text>().text = "Back";
+            GameObject.Find("Canvas").transform.Find("BackToChapterSelectButton").Find("Text").GetComponent<TMP_Text>().text = "Back";
+            GameObject.Find("Canvas").transform.Find("LevelSelect").Find("Level1").Find("Level1ScoreText").GetComponent<TMP_Text>().text = "Score:";
+            GameObject.Find("Canvas").transform.Find("LevelSelect").Find("Level2").Find("Level2ScoreText").GetComponent<TMP_Text>().text = "Score:";
+            GameObject.Find("Canvas").transform.Find("LevelSelect").Find("Level3").Find("Level3ScoreText").GetComponent<TMP_Text>().text = "Score:";
         }
     }
 
