@@ -18,6 +18,17 @@ public class ReInstantiate
         return gb;
     }
 
+    public static GameObject Run(GameObject prefab, Transform parent)
+    {
+        GameObject gb = null;
+        ///
+        gb = GameObject.Instantiate(prefab, new Vector2(0, 0), new Quaternion(0, 0, 0, 0));
+        gb.name = gb.name.Replace("(Clone)", "");
+        gb.transform.SetParent(parent);
+
+        return gb;
+    }
+
     public static GameObject Run(GameObject prefab, Vector2 position)
     {
         GameObject gb = null;
@@ -55,6 +66,7 @@ public class ReInstantiate
 
         gb = GameObject.Instantiate(prefab, position, quaternion);
         gb.name = gb.name.Replace("(Clone)", "");
+        gb.transform.SetParent(parent);
 
         return gb;
     }

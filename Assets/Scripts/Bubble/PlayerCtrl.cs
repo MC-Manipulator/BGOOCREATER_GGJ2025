@@ -38,6 +38,8 @@ namespace DefaultNameSpace
 
         private Bubble bubble;
 
+        public bool runShrinking = false;
+
         /// <summary>
         /// 起点（重生点）
         /// </summary>
@@ -79,7 +81,10 @@ namespace DefaultNameSpace
             {
                 // 移动会导致消耗加速
                 // 可能数字要改
-                bubble.Size -= (bubble.Size + 8) * RunShrink * Time.fixedDeltaTime;
+                if (runShrinking)
+                {
+                    bubble.Size -= (bubble.Size + 8) * RunShrink * Time.fixedDeltaTime;
+                }
             }
 
             // 转换为目标速度

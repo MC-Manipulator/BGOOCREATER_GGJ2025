@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UIElements;
 
 namespace DefaultNameSpace
 {
@@ -59,6 +60,11 @@ namespace DefaultNameSpace
         }
         private void Update()
         {
+            if (!(LevelManager.instance.state == LevelState.Game))
+            {
+                return;
+            }
+
             time -= Time.deltaTime;
             if (time <= 0)
             {
@@ -83,10 +89,35 @@ namespace DefaultNameSpace
             // 2 Pi
             const float Pi2 = Mathf.PI * 2;
 
-            GameObject go = Instantiate(this.bubble);
+            //限制泡泡不会在玩家摄像机视野内生成
             float x = Random.Range(PosMin.x, PosMax.x);
             float y = Random.Range(PosMin.y, PosMax.y);
-            go.transform.position = new Vector3(x, y, 0);
+            Vector2 position = new Vector3(x, y, 0);
+            Vector3 viewportPosition = GameObject.Find("Main Camera").GetComponent<Camera>().WorldToViewportPoint(position);
+            bool isInView = viewportPosition.x >= 0f && viewportPosition.x <= 1f &&
+                   viewportPosition.y >= 0f && viewportPosition.y <= 1f;
+            if (isInView)
+            {
+                return;
+            }
+
+            //限制泡泡不会生成在其他泡泡或者障碍物上
+            Collider2D[] hitColliders = Physics2D.OverlapCircleAll(position, 0.1f);
+
+            if (hitColliders.Length > 0)
+            {
+                // 找到了物体
+                foreach (var hitCollider in hitColliders)
+                {
+                    if (hitCollider.gameObject.tag == "Obstacle" || hitCollider.gameObject.tag == "Bubble")
+                    {
+                        return;
+                    }
+                }
+            }
+
+            GameObject go = ReInstantiate.Run(this.bubble, GameObject.Find("BubblePool").transform);
+            go.transform.position = position;
 
             // 初始化 Bubble 各属性
             Bubble bubbleState = go.GetComponent<Bubble>();

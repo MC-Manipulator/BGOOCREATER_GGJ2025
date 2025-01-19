@@ -10,7 +10,8 @@ public enum LevelState
 {
     Start, //关卡正式开始前的状态
     Game, //游戏进行状态
-    Restart,
+    Pause, //暂停状态
+    Restart, //重新开始游戏
     End //关卡结算状态
 }
 
@@ -23,6 +24,8 @@ public class LevelManager : MonoBehaviour
 
     public GameObject player;
     public GameObject scoreBoard;
+    public GameObject pauseBoard;
+    public GameObject timeRecord;
 
     public float time;
     public string timeString;
@@ -33,6 +36,8 @@ public class LevelManager : MonoBehaviour
 
     public GameObject maincamera;
     public GameObject restartMask;
+    public GameObject bubblePool;
+    public int levelNo = 0;
 
     private void Awake()
     {
@@ -49,11 +54,30 @@ public class LevelManager : MonoBehaviour
         FirstEnterLevel();
     }
 
+    private void Start()
+    {
+        if (GameManager.instance)
+        {
+            GameManager.instance.state = GameState.Game;
+            GameManager.instance.RefreshLevelLanguage();
+        }
+    }
+
+    public void CleanPool()
+    {
+        int size = bubblePool.transform.childCount;
+        for (int i = 0;i < size;i++)
+        {
+            Destroy(bubblePool.transform.GetChild(i).gameObject);
+        }
+    }
+
     public void FirstEnterLevel()
     {
         time = 0;
         state = LevelState.Start;
 
+        //Pause();
         player.GetComponent<Bubble>().Size = 4;
         player.transform.position = new Vector3(startPoint.position.x, startPoint.position.y, 0);
         player.GetComponent<PlayerCtrl>().RestrictMove();
@@ -63,6 +87,7 @@ public class LevelManager : MonoBehaviour
 
     public void RestartLevel()
     {
+        Resume();
         state = LevelState.Restart;
         time = 0;
         player.GetComponent<PlayerCtrl>().RestrictMove();
@@ -74,9 +99,11 @@ public class LevelManager : MonoBehaviour
 
     public void ResetPlayer()
     {
+        CleanPool();
         maincamera.transform.position = new Vector3(startPoint.position.x, startPoint.position.y, -10);
         player.transform.position = new Vector3(startPoint.position.x, startPoint.position.y, 0);
         player.GetComponent<Bubble>().Size = 4;
+        player.GetComponent<Bubble>().isDead = false;
         restartMask.GetComponent<Animator>().Play("EndRestart");
     }
 
@@ -100,9 +127,22 @@ public class LevelManager : MonoBehaviour
         if (state == LevelState.Game)
         {
             time += Time.deltaTime;
+            GameObject.Find("TimeValue").GetComponent<TMP_Text>().text = time.ToString("F2");
             if (player.transform.position.y > endPoint.position.y)
             {
                 EndLevel();
+            }
+
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                if (state == LevelState.Pause)
+                {
+                    Resume();
+                }
+                else
+                {
+                    Pause();
+                }
             }
         }
     }
@@ -152,13 +192,15 @@ public class LevelManager : MonoBehaviour
 
         Transform scoreList = scoreBoard.transform.Find("ScoreList");
 
-        scoreList.Find("LevelScorePart").transform.Find("LevelScore").gameObject.GetComponent<TMP_Text>().text = sizescore.ToString();
         scoreList.Find("TimePart").transform.Find("Time").gameObject.GetComponent<TMP_Text>().text = timeString;
-        scoreList.Find("TimeScorePart").transform.Find("TimeScore").gameObject.GetComponent<TMP_Text>().text = timeString;
+        scoreList.Find("TimeScorePart").transform.Find("TimeScore").gameObject.GetComponent<TMP_Text>().text = timescore.ToString();
         scoreList.Find("SizeScorePart").transform.Find("SizeScore").gameObject.GetComponent<TMP_Text>().text = sizescore.ToString();
+        scoreList.Find("LevelScorePart").transform.Find("LevelScore").gameObject.GetComponent<TMP_Text>().text = levelScore.ToString();
 
         scoreList.Find("Score").transform.Find("Score").gameObject.GetComponent<TMP_Text>().text = score.ToString();
         scoreBoard.SetActive(true);
+
+        ES3.Save("Level" + levelNo, score);
     }
 
     private void HideScoreBoard()
@@ -181,12 +223,16 @@ public class LevelManager : MonoBehaviour
 
     public void Pause()
     {
-
+        Time.timeScale = 0f;
+        state = LevelState.Pause;
+        pauseBoard.SetActive(true);
     }
 
     public void Resume()
     {
-
+        Time.timeScale = 1f;
+        state = LevelState.Game;
+        pauseBoard.SetActive(false);
     }
 
     public void BackToMenu()
@@ -224,6 +270,7 @@ public class LevelManager : MonoBehaviour
         countDownText.GetComponent<TMP_Text>().text = "Start!";
         yield return new WaitForSeconds(0.8f);
         countDownText.SetActive(false);
+        timeRecord.SetActive(true);
 
         StartLevel();
         isCountDown = false;

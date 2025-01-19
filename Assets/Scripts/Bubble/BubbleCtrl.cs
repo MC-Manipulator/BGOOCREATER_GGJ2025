@@ -42,6 +42,10 @@ namespace DefaultNameSpace
 
         public void FixedUpdate()
         {
+            if (!(LevelManager.instance.state == LevelState.Game))
+            {
+                return;
+            }
             /* 改变速度
                 速度 = 动态速度 + 静态速度
                 静态速度不变，一直向上

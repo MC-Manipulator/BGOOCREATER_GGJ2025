@@ -25,6 +25,20 @@ public class MenuManager : MonoBehaviour
         menuAnimator = menuObject.GetComponent<Animator>();
     }
 
+    public void Start()
+    {
+
+        if (GameManager.instance)
+        {
+            GameManager.instance.state = GameState.Menu;
+            GameManager.instance.RefreshMenuLanguage();
+        }
+    }
+
+    private void Update()
+    {
+    }
+
     public void EnterChapterSelect()
     {
         menuAnimator.Play("EnterChapterSelect");
@@ -58,5 +72,15 @@ public class MenuManager : MonoBehaviour
     public void ExitGame()
     {
 
+    }
+
+    public void SetChinese()
+    {
+        GameManager.instance.SetChinese();
+    }
+
+    public void SetEnglish()
+    {
+        GameManager.instance.SetEngish();
     }
 }

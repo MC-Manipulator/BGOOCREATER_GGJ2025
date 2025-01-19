@@ -37,6 +37,9 @@ namespace DefaultNameSpace
             }
         }
 
+        public bool isDead = false;
+        public bool isShrinking = false;
+
         // 字段
         private float size;
         /// <summary>
@@ -48,10 +51,26 @@ namespace DefaultNameSpace
 
         private void Start()
         {
-            InvokeRepeating(nameof(Shrink), 1, 0.1f);
+            isDead = false;
+            
+            if (isShrinking)
+            {
+                InvokeRepeating(nameof(Shrink), 1, 0.1f);
+            }
+            else
+            {
+                Debug.Log("1");
+                CancelInvoke(nameof(Shrink));
+            }
         }
         private void OnTriggerEnter2D(Collider2D other)
         {
+            if (other.tag == "Obstacle")
+            {
+                Die();
+                return;
+            }
+
             if (other.transform.parent.TryGetComponent(out Bubble bubble))
             {
                 if (Size > bubble.Size)
@@ -81,7 +100,7 @@ namespace DefaultNameSpace
         public void Eat(Bubble bubble)
         {
             // 无敌时间内不能吃
-            if (bubble.isInvincible)
+            if (bubble.isInvincible || isDead)
                 return;
             Size += bubble.Size;
             bubble.Die();
@@ -91,8 +110,12 @@ namespace DefaultNameSpace
         /// </summary>
         public void Die()
         {
-            // 触发死亡事件
-            OnDie?.Invoke();
+            if (!isDead)
+            {
+                isDead = true;
+                // 触发死亡事件
+                OnDie?.Invoke();
+            }
         }
 
         /// <summary>
