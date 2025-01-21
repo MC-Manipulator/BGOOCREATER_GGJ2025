@@ -33,17 +33,12 @@ namespace DefaultNameSpace
         private float vChangeSpeed;
         [SerializeField]
         private float RunShrink = 0.05f;
+        public bool runShrinking = false;
 
         public bool isRestrictMove = false;
 
         private Bubble bubble;
 
-        public bool runShrinking = false;
-
-        /// <summary>
-        /// 起点（重生点）
-        /// </summary>
-        //private Vector3 startPoint;
 
         // 消息
 
@@ -51,9 +46,7 @@ namespace DefaultNameSpace
         {
             // 登记事件
             bubble = GetComponent<Bubble>();
-            //bubble.OnDie += Bubble_OnDie;
-            //startPoint = transform.position;
-            //Restart();
+            bubble.OnDie += Bubble_OnDie;
         }
 
 
@@ -103,21 +96,20 @@ namespace DefaultNameSpace
             transform.position += Velocity * Time.fixedDeltaTime;
         }
 
-        /*
-        public void Restart()
+
+        public void PlayerStart()
         {
             Bubble b = GetComponent<Bubble>();
-            transform.position = startPoint;
             b.Size = 4;
-            b.SetInvincibleTime(8);
+            b.isDead = false;
+            transform.Find("Circle").gameObject.SetActive(true);
+            //b.SetInvincibleTime(8);
         }
-        */
 
-        //private void Bubble_OnDie()
-        //{
-        //    Debug.Log("你死了！");
-        //    //Restart();
-        //}
+        private void Bubble_OnDie()
+        {
+            transform.Find("Circle").gameObject.SetActive(false);
+        }
 
         public void RestrictMove()
         {

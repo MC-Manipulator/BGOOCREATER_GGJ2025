@@ -97,11 +97,9 @@ public class LevelManager : MonoBehaviour
     public void ResetPlayer()
     {
         CleanPool();
-        //player.SetActive(true);
         maincamera.transform.position = new Vector3(startPoint.position.x, startPoint.position.y, -10);
         player.transform.position = new Vector3(startPoint.position.x, startPoint.position.y, 0);
-        player.GetComponent<Bubble>().Size = 4;
-        player.GetComponent<Bubble>().isDead = false;
+        player.GetComponent<PlayerCtrl>().PlayerStart();
         restartMask.GetComponent<Animator>().Play("EndRestart");
     }
 
@@ -148,7 +146,6 @@ public class LevelManager : MonoBehaviour
 
     public void OnPlayerDie()
     {
-        //player.SetActive(false);
         RestartLevel();
     }
 

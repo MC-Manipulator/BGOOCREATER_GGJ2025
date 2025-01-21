@@ -36,7 +36,7 @@ public class ScoreManager : MonoBehaviour
     public float GetTimeScore()
     {
         float time = LevelManager.instance.time;
-        time = Mathf.Pow(time, -0.5f);  // y = x^(-0.5)
+        time = Mathf.Pow(time, -0.7f);  // y = x^(-0.5)
         time *= _timeRatio;
 
         return time;
@@ -46,6 +46,7 @@ public class ScoreManager : MonoBehaviour
     {
         float size = LevelManager.instance.GetPlayerSize(); 
         size = Mathf.Sqrt(size);
+        size *= 2;
 
         return size;
     }
