@@ -7,7 +7,9 @@ public class ScoreManager : MonoBehaviour
     public static ScoreManager instance;
 
     [SerializeField]
-    private float _timeRatio = 1000;    //时间的得分乘数
+    private float _timeRatio = 1500;    // 时间的得分乘数
+    [SerializeField]
+    private float _sizeRatio = 4;       // 大小的得分乘数
 
     private void Awake()
     {
@@ -36,7 +38,7 @@ public class ScoreManager : MonoBehaviour
     public float GetTimeScore()
     {
         float time = LevelManager.instance.time;
-        time = Mathf.Pow(time, -0.7f);  // y = x^(-0.5)
+        time = Mathf.Pow(time, -1);     // y = x^(-1)
         time *= _timeRatio;
 
         return time;
@@ -46,7 +48,7 @@ public class ScoreManager : MonoBehaviour
     {
         float size = LevelManager.instance.GetPlayerSize(); 
         size = Mathf.Sqrt(size);
-        size *= 2;
+        size *= _sizeRatio;
 
         return size;
     }
